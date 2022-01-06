@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/post/c-template-example.html</loc>
+    
+    <lastmod>2022-01-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jianan1104.github.io/jianan1104.github.io/post/power-using-recursion.html</loc>
     
     <lastmod>2022-01-06</lastmod>
@@ -124,21 +133,7 @@
   </url>
   
   <url>
-    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Leetcode/</loc>
-    <lastmod>2022-01-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Algorithm/</loc>
-    <lastmod>2022-01-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Javascript/</loc>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Template/</loc>
     <lastmod>2022-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -194,6 +189,27 @@
   </url>
   
   <url>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Leetcode/</loc>
+    <lastmod>2022-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Algorithm/</loc>
+    <lastmod>2022-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Javascript/</loc>
+    <lastmod>2022-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jianan1104.github.io/jianan1104.github.io/tags/Component/</loc>
     <lastmod>2022-01-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -210,7 +226,7 @@
   </url>
   
   <url>
-    <loc>https://jianan1104.github.io/jianan1104.github.io/categories/Leetcode/</loc>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/categories/Note/</loc>
     <lastmod>2022-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -225,6 +241,13 @@
   
   <url>
     <loc>https://jianan1104.github.io/jianan1104.github.io/categories/Vue/</loc>
+    <lastmod>2022-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jianan1104.github.io/jianan1104.github.io/categories/Leetcode/</loc>
     <lastmod>2022-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
