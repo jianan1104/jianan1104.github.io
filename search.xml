@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價</title>
+      <link href="/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/"/>
+      <url>/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/</url>
+      
+        <content type="html"><![CDATA[<p>根據時間序列的歷史資料來預測未來，進行預測的前提為序列資料是定態的，即序列的基本特徵不會發生大的改變，以下使用ARIMA模型、Prophet模型預測台積電股票的收盤價。</p><p>目前取得歷史資料的API集成已有多個函式庫可以使用，本文使用<a href="https://pypi.org/project/yfinance/">yfinance(Yahoo Finance)</a>作為資料來源。</p><h2 id="載入歷史資料"><a href="#載入歷史資料" class="headerlink" title="載入歷史資料"></a>載入歷史資料</h2><p>使用Yahoo Finance可以很輕鬆的取得歷史資料，由下圖可以看見拿到了從2000年至2022年8月的歷史資料，共有5655筆數據，包含了當日的開盤價、最高價、最低價、收盤價、交易量、股息以及是否有<a href="https://rich01.com/what-is-stock-splite/">股票分割（拆股）</a>等資料，接下來就要進行資料處理。</p><p><img src="https://miro.medium.com/max/640/1*8Uq5dw7-YDKxB5SLMdY93A.png"><br>Figure 1. 台積電歷史股價資料欄位</p><p><img src="https://miro.medium.com/max/720/1*23g4z9j_sgI29w02a3J0iA.png"><br>Figure 2. 台積電歷史股價資料(前)</p><p><img src="https://miro.medium.com/max/720/1*mWfmF1DdHkFnSw7dKu0l2w.png"><br>Figure 3. 台積電歷史股價資料(後)</p><h2 id="台積電歷史收盤價圖表"><a href="#台積電歷史收盤價圖表" class="headerlink" title="台積電歷史收盤價圖表"></a>台積電歷史收盤價圖表</h2><p>將收盤價用matplotlib繪製圖表，可以看見歷史價格的變化，可以觀察出近二年台積電真的漲翻天，接下來究竟會如何呢？<br><img src="https://miro.medium.com/max/720/1*NM4o0ZDaVMH41OIXAXP78g.png"><br>Figure 4. 台積電歷史收盤價圖表</p><h2 id="計算簡單移動平均與標準差指標"><a href="#計算簡單移動平均與標準差指標" class="headerlink" title="計算簡單移動平均與標準差指標"></a>計算簡單移動平均與標準差指標</h2><p>時間序列常使用移動平均作為預測的依據，因為短期內平均可以觀測出趨勢，標準差則能判斷出波動性，所以使用價格分別計算了簡單移動平均SMA3、SMA7、SMA30以及標準差STD3、STD7、STD30作為模型的輸入。此外還將月份、星期、週數也做為訊號之一，在時間序列的模型中也能看出是不是特定的時間點會有特定的變化？<br><img src="https://miro.medium.com/max/720/1*BjzbsMglLW0T25buR7Tn6g.png"><br>Figure 5. 計算移動平均與標準差指標</p><h2 id="切割訓練資料與測試資料"><a href="#切割訓練資料與測試資料" class="headerlink" title="切割訓練資料與測試資料"></a>切割訓練資料與測試資料</h2><p>我們需要將資料分為二等分，一份作爲模型的參考的數據，並以這些數據找出相對的模型結果，再將測試資料丟入訓練好的模型中進行預測。</p><p>本文將訓練集設定成2000年–2019年，測試集為2020年至2022年–08月，讓我來看看模型預測的結果如何？</p><h2 id="ARIMA模型"><a href="#ARIMA模型" class="headerlink" title="ARIMA模型"></a>ARIMA模型</h2><p><img src="https://miro.medium.com/max/720/1*hi5vJf4bkxRYHxy4jtlVBg.png"><br>Figure 6. 使用ARIMA模型預測台積電收盤價</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMSE of ARIMA: 9.542232073400012</span><br><span class="line">MAE  of ARIMA: 6.83280169777028</span><br></pre></td></tr></table></figure><h2 id="Prophet模型"><a href="#Prophet模型" class="headerlink" title="Prophet模型"></a>Prophet模型</h2><p><img src="https://miro.medium.com/max/720/1*57tk3n5WhDZRHx5yJPtk4w.png"><br>Figure 7. 使用Prophet模型預測台積電股價趨勢<br><img src="https://miro.medium.com/max/720/1*fzFoCPFRhWBjScLCWkqArw.png"><br>Figure 8. 使用Prophet模型預測台積電股價趨勢</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMSE of Prophet: 16.372098002143794</span><br><span class="line">MAE  of Prophet: 12.26518461707087</span><br></pre></td></tr></table></figure><h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p><img src="https://miro.medium.com/max/720/1*jN0erkld7rRPnEJAMKBUiQ.png"><br>Figure 9. ARIMA模型與Prophet模型預測結果圖</p><p>由圖表與誤差可見ARIMA模型預測結果較好，那麼這樣的模型能帶給量化交易者什麼樣的訊息呢？神經網路LSTM預測的結果又如何？下節待續。</p><p>很開心你有看到最後，如果你認為這篇文章有幫助到你，請幫我拍手！</p><p>對於量化交易有興趣的朋友歡迎訂閱與分享。</p><p><a href="https://github.com/jianan1104/TimeSeriesAnalysis">原始碼底加：Ｐ</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 量化交易 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 股票 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>量化交易基礎-描述性分析</title>
+      <link href="/2022/08/15/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A4%8E-%E6%8F%8F%E8%BF%B0%E6%80%A7%E5%88%86%E6%9E%90/"/>
+      <url>/2022/08/15/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A4%8E-%E6%8F%8F%E8%BF%B0%E6%80%A7%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://miro.medium.com/max/720/0*AAA27jXbXmFkF_YR"></p><p>Photo by <a href="https://unsplash.com/@tamiminaser?utm_source=medium&utm_medium=referral">Naser Tamimi</a> on <a href="https://unsplash.com/?utm_source=medium&utm_medium=referral">Unsplash</a></p><blockquote><p>金融數據分析是<a href="https://corporatefinanceinstitute.com/resources/knowledge/finance/quantitative-finance/">量化投資</a>工作不可或缺的一環，有的投資者因為正確地分析數據而獲得巨額利潤，也有投資者因誤判訊息而錯失良機，可以說正確分析經濟金融數據是投資成功的一大關鍵。</p><p>— 蔡立崙</p></blockquote><h1 id="統計分析-Statical-Analysis"><a href="#統計分析-Statical-Analysis" class="headerlink" title="統計分析(Statical Analysis)"></a>統計分析(Statical Analysis)</h1><p>統計分析是以數據為基礎進行分析與推斷的方法，包括以下兩大部分。</p><ul><li><a href="https://terms.naer.edu.tw/detail/1311172/">描述統計</a>(Descriptive Statistics)</li><li><a href="https://terms.naer.edu.tw/detail/1309746/">推論統計</a>(Inferential Statistics)</li></ul><p>將數據進行整理(Organization)，如排序、統計頻數(又稱次數)、繪製頻數分佈等，也可以計算指標對數據進行總結(Summarization)，包括平均數、中位數、最大與最小值等，對已知數據進行整理、歸類、簡化或繪製圖表來呈現數據特徵是<strong>描述性統計</strong>主要的內容。</p><p>對於某一特定事物所有可能發生的結果形成的集合，稱之為<a href="https://terms.naer.edu.tw/detail/1219062/">母體</a>(Population)，而其中一部分可觀察到的結果則稱為<a href="https://terms.naer.edu.tw/detail/1313804/">樣本</a>(Sample)。透過分析有限樣本推測母體的特徵是<strong>推論統計</strong>主要的工作內容，也是統計分析的重點所在。</p><p>抽樣的方法是統計學中重要的環節，樣本的好壞很大程度影響了推論統計的結果，所以抽樣方法希望最大程度上保證抽取出的樣本可以充分的包含母體的特徵訊息。常見的<a href="https://zh.wikipedia.org/zh-tw/%E6%8A%BD%E6%A8%A3">方法</a>有簡單抽樣(Simple Random Sampling)、系統抽樣(Systematic Sampling)、分層抽樣(Stratified Sampling)等。</p><h1 id="數據類型-Data-Type"><a href="#數據類型-Data-Type" class="headerlink" title="數據類型(Data Type)"></a>數據類型(Data Type)</h1><ul><li>定性數據(Qualitative Data)</li></ul><p>定性數據是呈現事物性質特徵的數據，如比特幣與以太幣屬於虛擬貨幣、台積電(2330)與元大台灣50(0050)屬於股票，那麼虛擬貨幣與股票即為定性數據。</p><ul><li>定量數據(Quantitative Data)</li></ul><p>定量數據是呈現事物數量特徵的數據，由不同大小的數字與單位組成，例如股票的收盤價、日漲幅、年增率等。</p><h1 id="圖表-Figure"><a href="#圖表-Figure" class="headerlink" title="圖表(Figure)"></a>圖表(Figure)</h1><p>資料視覺化是最直觀瞭解數據特徵的方法，常見的圖表有以下種。</p><ul><li>直方圖</li></ul><p>可以快速地觀察數據分佈情況，進階分析可以再計算<a href="https://zh.m.wikipedia.org/zh-tw/%E5%81%8F%E5%BA%A6">偏度</a>(Skew)來查看資料集中情況與<a href="https://zh.m.wikipedia.org/wiki/%E5%B3%B0%E5%BA%A6">峰度</a>(Kurtosis)來確定資料的常態性。</p><p><img src="https://miro.medium.com/max/720/0*5KAHMECKI8-KdHYS.png"></p><ul><li>折線圖</li></ul><p>觀察定量數據變化的情形，如股票收盤價。</p><p><img src="https://miro.medium.com/max/640/0*s6d3iF-HyfjykIVT.png"></p><ul><li>散佈圖</li></ul><p>查看二維數據彼此之間的分布情況</p><p><img src="https://miro.medium.com/max/640/0*jIGV3G565uzFOQYd.png"></p><h1 id="位置指標"><a href="#位置指標" class="headerlink" title="位置指標"></a>位置指標</h1><p>描述數據的位置特性常用的指標</p><ul><li>樣本平均數</li><li>幾何平均數</li><li>中位數</li><li>眾數</li><li>百分位數</li></ul><h1 id="離散指標"><a href="#離散指標" class="headerlink" title="離散指標"></a>離散指標</h1><p>描述數據離散程度的指標</p><ul><li>全距</li><li>平均絕對偏差</li><li>變異數</li><li>標準差</li></ul><blockquote><p>參考資料：《金融科技實戰Python與量化投資》</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 量化交易 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 量化交易 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

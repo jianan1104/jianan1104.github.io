@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="根據時間序列的歷史資料來預測未來，進行預測的前提為序列資料是定態的，即序列的基本特徵不會發生大的改變，以下使用ARIMA模型、Prophet模型預測台積電股票的收盤價。 目前取得歷史資料的API集成已有多個函式庫可以使用，本文使用yfinance(Yahoo Finance)作為資料來源。 載入歷史資料使用Yahoo Finance可以很輕鬆的取得歷史資料，由下圖可以看見拿到了從2000年至202">
+<meta property="og:type" content="article">
+<meta property="og:title" content="台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價">
+<meta property="og:url" content="https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/index.html">
+<meta property="og:site_name" content="Jianan&#39;s blog">
+<meta property="og:description" content="根據時間序列的歷史資料來預測未來，進行預測的前提為序列資料是定態的，即序列的基本特徵不會發生大的改變，以下使用ARIMA模型、Prophet模型預測台積電股票的收盤價。 目前取得歷史資料的API集成已有多個函式庫可以使用，本文使用yfinance(Yahoo Finance)作為資料來源。 載入歷史資料使用Yahoo Finance可以很輕鬆的取得歷史資料，由下圖可以看見拿到了從2000年至202">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://miro.medium.com/max/640/1*8Uq5dw7-YDKxB5SLMdY93A.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*23g4z9j_sgI29w02a3J0iA.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*mWfmF1DdHkFnSw7dKu0l2w.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*NM4o0ZDaVMH41OIXAXP78g.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*BjzbsMglLW0T25buR7Tn6g.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*hi5vJf4bkxRYHxy4jtlVBg.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*57tk3n5WhDZRHx5yJPtk4w.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*fzFoCPFRhWBjScLCWkqArw.png">
+<meta property="og:image" content="https://miro.medium.com/max/720/1*jN0erkld7rRPnEJAMKBUiQ.png">
+<meta property="article:published_time" content="2022-08-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-20T16:44:32.253Z">
+<meta property="article:author" content="Jian-An, Lin 林建安">
+<meta property="article:tag" content="股票">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/640/1*8Uq5dw7-YDKxB5SLMdY93A.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Jianan's blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/jianan1104">Projects</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/08/15/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A4%8E-%E6%8F%8F%E8%BF%B0%E6%80%A7%E5%88%86%E6%9E%90/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&text=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&is_video=false&description=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價&body=Check out this article: https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&name=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&t=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BC%89%E5%85%A5%E6%AD%B7%E5%8F%B2%E8%B3%87%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">載入歷史資料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%B0%E7%A9%8D%E9%9B%BB%E6%AD%B7%E5%8F%B2%E6%94%B6%E7%9B%A4%E5%83%B9%E5%9C%96%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">台積電歷史收盤價圖表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%88%E7%AE%97%E7%B0%A1%E5%96%AE%E7%A7%BB%E5%8B%95%E5%B9%B3%E5%9D%87%E8%88%87%E6%A8%99%E6%BA%96%E5%B7%AE%E6%8C%87%E6%A8%99"><span class="toc-number">3.</span> <span class="toc-text">計算簡單移動平均與標準差指標</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E5%89%B2%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E8%88%87%E6%B8%AC%E8%A9%A6%E8%B3%87%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">切割訓練資料與測試資料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARIMA%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">ARIMA模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prophet%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">Prophet模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B8%BD%E7%B5%90"><span class="toc-number">7.</span> <span class="toc-text">總結</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Jian-An, Lin 林建安</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-08-24T16:00:00.000Z" itemprop="datePublished">2022 Aug 25th</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93/">量化交易</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E8%82%A1%E7%A5%A8/" rel="tag">股票</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>根據時間序列的歷史資料來預測未來，進行預測的前提為序列資料是定態的，即序列的基本特徵不會發生大的改變，以下使用ARIMA模型、Prophet模型預測台積電股票的收盤價。</p>
+<p>目前取得歷史資料的API集成已有多個函式庫可以使用，本文使用<a target="_blank" rel="noopener" href="https://pypi.org/project/yfinance/">yfinance(Yahoo Finance)</a>作為資料來源。</p>
+<h2 id="載入歷史資料"><a href="#載入歷史資料" class="headerlink" title="載入歷史資料"></a>載入歷史資料</h2><p>使用Yahoo Finance可以很輕鬆的取得歷史資料，由下圖可以看見拿到了從2000年至2022年8月的歷史資料，共有5655筆數據，包含了當日的開盤價、最高價、最低價、收盤價、交易量、股息以及是否有<a target="_blank" rel="noopener" href="https://rich01.com/what-is-stock-splite/">股票分割（拆股）</a>等資料，接下來就要進行資料處理。</p>
+<p><img src="https://miro.medium.com/max/640/1*8Uq5dw7-YDKxB5SLMdY93A.png"><br>Figure 1. 台積電歷史股價資料欄位</p>
+<p><img src="https://miro.medium.com/max/720/1*23g4z9j_sgI29w02a3J0iA.png"><br>Figure 2. 台積電歷史股價資料(前)</p>
+<p><img src="https://miro.medium.com/max/720/1*mWfmF1DdHkFnSw7dKu0l2w.png"><br>Figure 3. 台積電歷史股價資料(後)</p>
+<h2 id="台積電歷史收盤價圖表"><a href="#台積電歷史收盤價圖表" class="headerlink" title="台積電歷史收盤價圖表"></a>台積電歷史收盤價圖表</h2><p>將收盤價用matplotlib繪製圖表，可以看見歷史價格的變化，可以觀察出近二年台積電真的漲翻天，接下來究竟會如何呢？<br><img src="https://miro.medium.com/max/720/1*NM4o0ZDaVMH41OIXAXP78g.png"><br>Figure 4. 台積電歷史收盤價圖表</p>
+<h2 id="計算簡單移動平均與標準差指標"><a href="#計算簡單移動平均與標準差指標" class="headerlink" title="計算簡單移動平均與標準差指標"></a>計算簡單移動平均與標準差指標</h2><p>時間序列常使用移動平均作為預測的依據，因為短期內平均可以觀測出趨勢，標準差則能判斷出波動性，所以使用價格分別計算了簡單移動平均SMA3、SMA7、SMA30以及標準差STD3、STD7、STD30作為模型的輸入。此外還將月份、星期、週數也做為訊號之一，在時間序列的模型中也能看出是不是特定的時間點會有特定的變化？<br><img src="https://miro.medium.com/max/720/1*BjzbsMglLW0T25buR7Tn6g.png"><br>Figure 5. 計算移動平均與標準差指標</p>
+<h2 id="切割訓練資料與測試資料"><a href="#切割訓練資料與測試資料" class="headerlink" title="切割訓練資料與測試資料"></a>切割訓練資料與測試資料</h2><p>我們需要將資料分為二等分，一份作爲模型的參考的數據，並以這些數據找出相對的模型結果，再將測試資料丟入訓練好的模型中進行預測。</p>
+<p>本文將訓練集設定成2000年–2019年，測試集為2020年至2022年–08月，讓我來看看模型預測的結果如何？</p>
+<h2 id="ARIMA模型"><a href="#ARIMA模型" class="headerlink" title="ARIMA模型"></a>ARIMA模型</h2><p><img src="https://miro.medium.com/max/720/1*hi5vJf4bkxRYHxy4jtlVBg.png"><br>Figure 6. 使用ARIMA模型預測台積電收盤價</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMSE of ARIMA: 9.542232073400012</span><br><span class="line">MAE  of ARIMA: 6.83280169777028</span><br></pre></td></tr></table></figure>
+
+<h2 id="Prophet模型"><a href="#Prophet模型" class="headerlink" title="Prophet模型"></a>Prophet模型</h2><p><img src="https://miro.medium.com/max/720/1*57tk3n5WhDZRHx5yJPtk4w.png"><br>Figure 7. 使用Prophet模型預測台積電股價趨勢<br><img src="https://miro.medium.com/max/720/1*fzFoCPFRhWBjScLCWkqArw.png"><br>Figure 8. 使用Prophet模型預測台積電股價趨勢</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RMSE of Prophet:	 16.372098002143794</span><br><span class="line">MAE  of Prophet:	 12.26518461707087</span><br></pre></td></tr></table></figure>
+
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p><img src="https://miro.medium.com/max/720/1*jN0erkld7rRPnEJAMKBUiQ.png"><br>Figure 9. ARIMA模型與Prophet模型預測結果圖</p>
+<p>由圖表與誤差可見ARIMA模型預測結果較好，那麼這樣的模型能帶給量化交易者什麼樣的訊息呢？神經網路LSTM預測的結果又如何？下節待續。</p>
+<p>很開心你有看到最後，如果你認為這篇文章有幫助到你，請幫我拍手！</p>
+<p>對於量化交易有興趣的朋友歡迎訂閱與分享。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jianan1104/TimeSeriesAnalysis">原始碼底加：Ｐ</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/jianan1104">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BC%89%E5%85%A5%E6%AD%B7%E5%8F%B2%E8%B3%87%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">載入歷史資料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%B0%E7%A9%8D%E9%9B%BB%E6%AD%B7%E5%8F%B2%E6%94%B6%E7%9B%A4%E5%83%B9%E5%9C%96%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">台積電歷史收盤價圖表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A8%88%E7%AE%97%E7%B0%A1%E5%96%AE%E7%A7%BB%E5%8B%95%E5%B9%B3%E5%9D%87%E8%88%87%E6%A8%99%E6%BA%96%E5%B7%AE%E6%8C%87%E6%A8%99"><span class="toc-number">3.</span> <span class="toc-text">計算簡單移動平均與標準差指標</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E5%89%B2%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E8%88%87%E6%B8%AC%E8%A9%A6%E8%B3%87%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">切割訓練資料與測試資料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARIMA%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">ARIMA模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prophet%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">Prophet模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B8%BD%E7%B5%90"><span class="toc-number">7.</span> <span class="toc-text">總結</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&text=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&is_video=false&description=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價&body=Check out this article: https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&title=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&name=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://jianan1104.dev/2022/08/25/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%82%A1%E7%A5%A8%E6%99%82%E9%96%93%E5%BA%8F%E5%88%97%E9%A0%90%E6%B8%AC-%E4%BD%BF%E7%94%A8ARIMA%E6%A8%A1%E5%9E%8BProphet%E6%A8%A1%E5%9E%8B%E9%A0%90%E6%B8%AC%E6%94%B6%E7%9B%A4%E5%83%B9/&t=台積電股票時間序列預測-使用ARIMA模型、Prophet模型預測收盤價"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Jian-An, Lin 林建安
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/jianan1104">Projects</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9Q7MRJD2DL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9Q7MRJD2DL');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'jianan1104-blog';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
