@@ -62,4 +62,286 @@
     
   </entry>
   
+  <entry>
+    <title>Fibonacci Using Recursioin</title>
+    <link href="https://jianan1104.dev/2022/01/09/fibonacci-using-recursioin/"/>
+    <id>https://jianan1104.dev/2022/01/09/fibonacci-using-recursioin/</id>
+    <published>2022-01-09T15:58:38.000Z</published>
+    <updated>2022-10-20T16:55:27.805Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;hr&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span clas</summary>
+      
+    
+    
+    
+    <category term="Algorithms" scheme="https://jianan1104.dev/categories/Algorithms/"/>
+    
+    
+    <category term="C/C++" scheme="https://jianan1104.dev/tags/C-C/"/>
+    
+    <category term="Recursion" scheme="https://jianan1104.dev/tags/Recursion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Exponential Function Using Recursion</title>
+    <link href="https://jianan1104.dev/2022/01/08/exponential-function-using-recursion/"/>
+    <id>https://jianan1104.dev/2022/01/08/exponential-function-using-recursion/</id>
+    <published>2022-01-07T19:46:31.000Z</published>
+    <updated>2022-10-20T16:55:27.760Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li</summary>
+      
+    
+    
+    
+    <category term="Note" scheme="https://jianan1104.dev/categories/Note/"/>
+    
+    
+    <category term="C/C++" scheme="https://jianan1104.dev/tags/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ Template Example</title>
+    <link href="https://jianan1104.dev/2022/01/06/c-template-example/"/>
+    <id>https://jianan1104.dev/2022/01/06/c-template-example/</id>
+    <published>2022-01-06T14:52:55.000Z</published>
+    <updated>2022-10-20T16:55:27.753Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;</summary>
+      
+    
+    
+    
+    <category term="Note" scheme="https://jianan1104.dev/categories/Note/"/>
+    
+    
+    <category term="C/C++" scheme="https://jianan1104.dev/tags/C-C/"/>
+    
+    <category term="Template" scheme="https://jianan1104.dev/tags/Template/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Power Using Recursion</title>
+    <link href="https://jianan1104.dev/2022/01/06/power-using-recursion/"/>
+    <id>https://jianan1104.dev/2022/01/06/power-using-recursion/</id>
+    <published>2022-01-06T14:42:33.000Z</published>
+    <updated>2022-10-20T16:55:27.867Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li</summary>
+      
+    
+    
+    
+    <category term="Algorithms" scheme="https://jianan1104.dev/categories/Algorithms/"/>
+    
+    
+    <category term="C/C++" scheme="https://jianan1104.dev/tags/C-C/"/>
+    
+    <category term="Recursion" scheme="https://jianan1104.dev/tags/Recursion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Factorial Using Recursion</title>
+    <link href="https://jianan1104.dev/2022/01/06/factorial-using-recursion/"/>
+    <id>https://jianan1104.dev/2022/01/06/factorial-using-recursion/</id>
+    <published>2022-01-05T16:05:19.000Z</published>
+    <updated>2022-10-20T16:55:27.794Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li</summary>
+      
+    
+    
+    
+    <category term="Algorithms" scheme="https://jianan1104.dev/categories/Algorithms/"/>
+    
+    
+    <category term="C/C++" scheme="https://jianan1104.dev/tags/C-C/"/>
+    
+    <category term="Recursion" scheme="https://jianan1104.dev/tags/Recursion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sum of N Using Recursion</title>
+    <link href="https://jianan1104.dev/2022/01/03/sum-of-n-using-recursion/"/>
+    <id>https://jianan1104.dev/2022/01/03/sum-of-n-using-recursion/</id>
+    <published>2022-01-03T12:59:59.000Z</published>
+    <updated>2022-10-20T16:55:27.876Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li</summary>
+      
+    
+    
+    
+    <category term="Algorithms" scheme="https://jianan1104.dev/categories/Algorithms/"/>
+    
+    
+    <category term="C/C++" scheme="https://jianan1104.dev/tags/C-C/"/>
+    
+    <category term="Recursion" scheme="https://jianan1104.dev/tags/Recursion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue Component介紹</title>
+    <link href="https://jianan1104.dev/2021/12/01/vue-create-component/"/>
+    <id>https://jianan1104.dev/2021/12/01/vue-create-component/</id>
+    <published>2021-11-30T17:23:37.000Z</published>
+    <updated>2022-10-20T16:55:27.926Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;:::tip 什麼是component?&lt;br&gt;元件(component)是一段獨立的程式碼，代表網頁的一部份。元件有自己的資料與Javascript，通常也帶有自己的樣式。可以包含其他的元件，也能彼此進行溝通。元件可以是按鈕或是圖示，也可以是能在整個網站或網頁中重複使用的</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="https://jianan1104.dev/categories/Vue/"/>
+    
+    
+    <category term="Vue" scheme="https://jianan1104.dev/tags/Vue/"/>
+    
+    <category term="Component" scheme="https://jianan1104.dev/tags/Component/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>超常用的Unix指令-ls</title>
+    <link href="https://jianan1104.dev/2021/11/25/%E8%B6%85%E5%B8%B8%E7%94%A8%E7%9A%84Unix%E6%8C%87%E4%BB%A4-ls/"/>
+    <id>https://jianan1104.dev/2021/11/25/%E8%B6%85%E5%B8%B8%E7%94%A8%E7%9A%84Unix%E6%8C%87%E4%BB%A4-ls/</id>
+    <published>2021-11-24T17:06:34.000Z</published>
+    <updated>2022-10-20T16:55:27.732Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;不管是什麼類型的工程師，都必須跟終端機(Terminal)好好相處，查看目錄&lt;code&gt;ls&lt;/code&gt;我想是大家第一個學的Unix指令，以下是我常用的用法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;ls-基本用法&quot;&gt;&lt;a href=</summary>
+      
+    
+    
+    
+    <category term="Devops" scheme="https://jianan1104.dev/categories/Devops/"/>
+    
+    
+    <category term="Windows" scheme="https://jianan1104.dev/tags/Windows/"/>
+    
+    <category term="Mac" scheme="https://jianan1104.dev/tags/Mac/"/>
+    
+    <category term="Unix" scheme="https://jianan1104.dev/tags/Unix/"/>
+    
+    <category term="Bash" scheme="https://jianan1104.dev/tags/Bash/"/>
+    
+    <category term="遇到問題就解決" scheme="https://jianan1104.dev/tags/%E9%81%87%E5%88%B0%E5%95%8F%E9%A1%8C%E5%B0%B1%E8%A7%A3%E6%B1%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode - Palindrome Number(Easy)</title>
+    <link href="https://jianan1104.dev/2021/11/25/leetcode-easy-number/"/>
+    <id>https://jianan1104.dev/2021/11/25/leetcode-easy-number/</id>
+    <published>2021-11-24T16:22:31.000Z</published>
+    <updated>2022-10-20T16:55:27.841Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;No-9-Palindrome-Number&quot;&gt;&lt;a href=&quot;#No-9-Palindrome-Number&quot; class=&quot;headerlink&quot; title=&quot;No.9 Palindrome Number&quot;&gt;&lt;/a&gt;No.9 Palindrome Numb</summary>
+      
+    
+    
+    
+    <category term="Leetcode" scheme="https://jianan1104.dev/categories/Leetcode/"/>
+    
+    
+    <category term="Leetcode" scheme="https://jianan1104.dev/tags/Leetcode/"/>
+    
+    <category term="Algorithm" scheme="https://jianan1104.dev/tags/Algorithm/"/>
+    
+    <category term="Javascript" scheme="https://jianan1104.dev/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>v-if與v-show有什麼不同？</title>
+    <link href="https://jianan1104.dev/2021/11/23/v-if-v-show/"/>
+    <id>https://jianan1104.dev/2021/11/23/v-if-v-show/</id>
+    <published>2021-11-22T17:32:21.000Z</published>
+    <updated>2022-10-20T16:55:27.916Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;:::tip 發生什麼事？&lt;br&gt;同樣是作為內容呈現邏輯判斷的樣板指令，究竟有何不同？什麼時候該用哪個？&lt;br&gt;:::&lt;/p&gt;
+&lt;h1 id=&quot;v-if-的特性&quot;&gt;&lt;a href=&quot;#v-if-的特性&quot; class=&quot;headerlink&quot; title=&quot;v-if 的特性&quot;</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="https://jianan1104.dev/categories/Vue/"/>
+    
+    
+    <category term="Vue" scheme="https://jianan1104.dev/tags/Vue/"/>
+    
+    <category term="Front-end" scheme="https://jianan1104.dev/tags/Front-end/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何終止當前使用本地主機上的端口的進程</title>
+    <link href="https://jianan1104.dev/2021/11/22/how-to-kill-port/"/>
+    <id>https://jianan1104.dev/2021/11/22/how-to-kill-port/</id>
+    <published>2021-11-21T16:00:00.000Z</published>
+    <updated>2022-10-20T16:55:27.828Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;:::tip 發生什麼事？&lt;br&gt;在進行本地開發時，需要透過本地端口建立伺服器連線進行預覽或測試，碰到端口(port)佔用時該如何解決呢？&lt;br&gt;:::&lt;/p&gt;
+&lt;h3 id=&quot;For-Windows-user&quot;&gt;&lt;a href=&quot;#For-Windows-user&quot; cl</summary>
+      
+    
+    
+    
+    <category term="Devops" scheme="https://jianan1104.dev/categories/Devops/"/>
+    
+    
+    <category term="Windows" scheme="https://jianan1104.dev/tags/Windows/"/>
+    
+    <category term="Mac" scheme="https://jianan1104.dev/tags/Mac/"/>
+    
+    <category term="Unix" scheme="https://jianan1104.dev/tags/Unix/"/>
+    
+    <category term="Bash" scheme="https://jianan1104.dev/tags/Bash/"/>
+    
+    <category term="遇到問題就解決" scheme="https://jianan1104.dev/tags/%E9%81%87%E5%88%B0%E5%95%8F%E9%A1%8C%E5%B0%B1%E8%A7%A3%E6%B1%BA/"/>
+    
+  </entry>
+  
 </feed>

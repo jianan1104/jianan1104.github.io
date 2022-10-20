@@ -52,6 +52,315 @@
     </entry>
     
     
+    
+    <entry>
+      <title>Fibonacci Using Recursioin</title>
+      <link href="/2022/01/09/fibonacci-using-recursioin/"/>
+      <url>/2022/01/09/fibonacci-using-recursioin/</url>
+      
+        <content type="html"><![CDATA[<hr><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Fibo</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)</span><br><span class="line">       <span class="keyword">return</span> n;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">       <span class="keyword">return</span> Fibo(n<span class="number">-2</span>) + Fibo(n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">        F[i] = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, Fibo(<span class="number">5</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="Using-memorisation"><a href="#Using-memorisation" class="headerlink" title="Using memorisation"></a>Using memorisation</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> F[<span class="number">10</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">Fibo</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;=<span class="number">1</span>) &#123;</span><br><span class="line">        F[n] = n;</span><br><span class="line">        <span class="keyword">return</span> F[n];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(F[n<span class="number">-2</span>] == <span class="number">-1</span>)</span><br><span class="line">            F[n<span class="number">-2</span>] = Fibo(n<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">if</span>(F[n<span class="number">-1</span>] == <span class="number">-1</span>)</span><br><span class="line">            F[n<span class="number">-1</span>] = Fibo(n<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> F[n<span class="number">-2</span>] + F[n<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">        F[i] = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, Fibo(<span class="number">5</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithms </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> Recursion </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Exponential Function Using Recursion</title>
+      <link href="/2022/01/08/exponential-function-using-recursion/"/>
+      <url>/2022/01/08/exponential-function-using-recursion/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">e</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">double</span> r;</span><br><span class="line">    <span class="type">static</span> <span class="type">double</span> p = <span class="number">1</span>, f = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        r = e(m, n<span class="number">-1</span>);</span><br><span class="line">        p = p*m;</span><br><span class="line">        f = f*n;</span><br><span class="line">        <span class="keyword">return</span> r + p/f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, e(<span class="number">1</span>,<span class="number">10</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="Use-horner’s-rule"><a href="#Use-horner’s-rule" class="headerlink" title="Use horner’s rule"></a>Use horner’s rule</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">e</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">double</span> s = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        s = <span class="number">1</span> + m*s/n;</span><br><span class="line">        <span class="keyword">return</span> e(m, n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, e(<span class="number">1</span>,<span class="number">10</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2.718282</span><br><span class="line">Program ended with <span class="built_in">exit</span> code: 0</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Note </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++ Template Example</title>
+      <link href="/2022/01/06/c-template-example/"/>
+      <url>/2022/01/06/c-template-example/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">math</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        T a;</span><br><span class="line">        T b;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">math</span>(T a, T b);</span><br><span class="line">        <span class="function">T <span class="title">add</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function">T <span class="title">sub</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">math&lt;T&gt;::<span class="built_in">math</span>(T a, T b)&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">    <span class="keyword">this</span>-&gt;b = b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">T math&lt;T&gt;::<span class="built_in">add</span>()&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">T math&lt;T&gt;::<span class="built_in">sub</span>()&#123;</span><br><span class="line">    <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">math&lt;<span class="type">int</span>&gt; <span class="title">m1</span><span class="params">(<span class="number">10</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line">    <span class="function">math&lt;<span class="type">float</span>&gt; <span class="title">m2</span><span class="params">(<span class="number">2.5</span>,<span class="number">0.5</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; m1.<span class="built_in">add</span>() &lt;&lt; endl &lt;&lt; m1.<span class="built_in">sub</span>() &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; m2.<span class="built_in">add</span>() &lt;&lt; endl &lt;&lt; m2.<span class="built_in">sub</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Note </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> Template </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Power Using Recursion</title>
+      <link href="/2022/01/06/power-using-recursion/"/>
+      <url>/2022/01/06/power-using-recursion/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">power</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">       <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">       <span class="keyword">return</span> power(m, n<span class="number">-1</span>)*m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, power(<span class="number">2</span>, <span class="number">5</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="Faster-solution"><a href="#Faster-solution" class="headerlink" title="Faster solution"></a>Faster solution</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">power</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> power(m*m, n/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> m*power(m*m, (n<span class="number">-1</span>)/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, power(<span class="number">2</span>, <span class="number">5</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithms </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> Recursion </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Factorial Using Recursion</title>
+      <link href="/2022/01/06/factorial-using-recursion/"/>
+      <url>/2022/01/06/factorial-using-recursion/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">factorial</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> factorial(n<span class="number">-1</span>)*n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, factorial(num));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithms </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> Recursion </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Sum of N Using Recursion</title>
+      <link href="/2022/01/03/sum-of-n-using-recursion/"/>
+      <url>/2022/01/03/sum-of-n-using-recursion/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sum(n<span class="number">-1</span>)+n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> * argv[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, sum(num));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithms </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> Recursion </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vue Component介紹</title>
+      <link href="/2021/12/01/vue-create-component/"/>
+      <url>/2021/12/01/vue-create-component/</url>
+      
+        <content type="html"><![CDATA[<p>:::tip 什麼是component?<br>元件(component)是一段獨立的程式碼，代表網頁的一部份。元件有自己的資料與Javascript，通常也帶有自己的樣式。可以包含其他的元件，也能彼此進行溝通。元件可以是按鈕或是圖示，也可以是能在整個網站或網頁中重複使用的表單這種大元素。<br>:::</p><h1 id="元件基礎"><a href="#元件基礎" class="headerlink" title="元件基礎"></a>元件基礎</h1><p>撰寫一個間單的元件</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">SimpleButton</span> = &#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>Simple button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>接下來可以透過 components物件將這個元件傳進app中</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">simple-button</span>&gt;</span><span class="tag">&lt;/<span class="name">simple-button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">const</span> <span class="title class_">SimpleButton</span> = &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="attr">template</span>: <span class="string">&#x27;&lt;button&gt;Simple Button&lt;/button&gt;&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="attr">components</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="title class_">SimpleButton</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure><p>也可以透過全域的方式註冊元件</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;simple-button&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="string">&#x27;button&gt;Simple Button&lt;/button&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+            <tag> Component </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>超常用的Unix指令-ls</title>
+      <link href="/2021/11/25/%E8%B6%85%E5%B8%B8%E7%94%A8%E7%9A%84Unix%E6%8C%87%E4%BB%A4-ls/"/>
+      <url>/2021/11/25/%E8%B6%85%E5%B8%B8%E7%94%A8%E7%9A%84Unix%E6%8C%87%E4%BB%A4-ls/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>不管是什麼類型的工程師，都必須跟終端機(Terminal)好好相處，查看目錄<code>ls</code>我想是大家第一個學的Unix指令，以下是我常用的用法。</p></blockquote><h1 id="ls-基本用法"><a href="#ls-基本用法" class="headerlink" title="ls 基本用法"></a>ls 基本用法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> </span><br></pre></td></tr></table></figure><p><img src="/../images/f69b45f945fc1f1306866ea973ca61eeb4508d0364038697045f2462ba1cb700.png" alt="ls 基本用法">  </p><h1 id="以清單模式顯示"><a href="#以清單模式顯示" class="headerlink" title="以清單模式顯示"></a>以清單模式顯示</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l</span><br></pre></td></tr></table></figure><p><img src="/../images/00a6c6f865c97f6b6a43fc90df4c9f183d20a3c3dda5099ffe1b4bad8e7fb2d5.png" alt="以清單模式顯示">  </p><h1 id="顯示隱藏檔案"><a href="#顯示隱藏檔案" class="headerlink" title="顯示隱藏檔案"></a>顯示隱藏檔案</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -a</span><br></pre></td></tr></table></figure><p><img src="/../images/deefc4eb3c3e957ef3a193b80904e99521153b1a287b2bdcd1a689ee40df88e4.png" alt="顯示隱藏檔案">  </p><h1 id="以時間排序"><a href="#以時間排序" class="headerlink" title="以時間排序"></a>以時間排序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -ltr</span><br></pre></td></tr></table></figure><p><img src="/../images/16119d3502a26a2108c7eccef4fe8ffed7d2aec790d4ec8a6b922212b3ac9da7.png" alt="以時間排序">  </p><h1 id="以檔案大小排序"><a href="#以檔案大小排序" class="headerlink" title="以檔案大小排序"></a>以檔案大小排序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -lS</span><br></pre></td></tr></table></figure><p><img src="/../images/34eadbfa2e1241f59eb0a8f1dfc64e6fbc2764632371c9e2bb9437503a1ef15a.png" alt="以檔案大小排序">  </p><p>想知道更多關於: <a href="https://man7.org/linux/man-pages/man1/ls.1.html">ls</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Windows </tag>
+            
+            <tag> Mac </tag>
+            
+            <tag> Unix </tag>
+            
+            <tag> Bash </tag>
+            
+            <tag> 遇到問題就解決 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode - Palindrome Number(Easy)</title>
+      <link href="/2021/11/25/leetcode-easy-number/"/>
+      <url>/2021/11/25/leetcode-easy-number/</url>
+      
+        <content type="html"><![CDATA[<h2 id="No-9-Palindrome-Number"><a href="#No-9-Palindrome-Number" class="headerlink" title="No.9 Palindrome Number"></a>No.9 Palindrome Number</h2><p>:::tip Problem<br>Given an integer x, return true if x is palindrome integer.</p><p>An integer is a palindrome when it reads the same backward as forward. For example, 121 is palindrome while 123 is not.<br>:::</p><p>簡單來說，題目給定整數x，只要順著與反著順序相同回傳True反之Fasle。</p><h1 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h1><p>在做任何題目之前，千萬別著急開始coding，應當先理清題目與<strong>假設</strong>會遇到的情況，將解題流程拆分成數個條件，再來寫程式與測試。</p><ul><li><p>條件一 x 不能為負 </p><ul><li>正反順序相同，前面若是配上個<code>-</code>負號就不能通過，所以x &lt;  0則return false</li></ul></li><li><p>條件二 頭尾需相同</p><ul><li>正反順序相同，意味著頭與尾是同個數字，所以檢測頭尾是否相同，不同則return false</li></ul></li><li><p>條件三 須符合鏡射</p><ul><li>正反順序相同，也就代表以該數中間為中心，左右數字需對稱，所以若不符合鏡射則return false</li></ul></li></ul><h1 id="my-solution"><a href="#my-solution" class="headerlink" title="my solution"></a>my solution</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; <span class="variable">x</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">boolean</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isPalindrome = <span class="keyword">function</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> array = x.<span class="title function_">toString</span>();</span><br><span class="line">  <span class="keyword">const</span> len = array.<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">if</span>(x &lt; <span class="number">0</span> || array[<span class="number">0</span>] !== array[len-<span class="number">1</span>]) </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; (len-<span class="number">1</span>) / <span class="number">2</span> + <span class="number">1</span>; i++) </span><br><span class="line">      <span class="keyword">if</span>(array[i-<span class="number">1</span>] !== array[<span class="title class_">Math</span>.<span class="title function_">abs</span>(i-len)]) </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>想知道更多關於: <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/toString">toString</a>, <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/length">length</a><br>, <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Math/abs">abs</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> Javascript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>v-if與v-show有什麼不同？</title>
+      <link href="/2021/11/23/v-if-v-show/"/>
+      <url>/2021/11/23/v-if-v-show/</url>
+      
+        <content type="html"><![CDATA[<p>:::tip 發生什麼事？<br>同樣是作為內容呈現邏輯判斷的樣板指令，究竟有何不同？什麼時候該用哪個？<br>:::</p><h1 id="v-if-的特性"><a href="#v-if-的特性" class="headerlink" title="v-if 的特性"></a>v-if 的特性</h1><blockquote><p>透過v-if指令計算出為false，則<em><strong>不會輸出</strong></em>到DOM中。</p></blockquote><p>程式原始碼:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;true&quot;</span>&gt;</span>one<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;false&quot;</span>&gt;</span>two<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>實際輸出:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>one<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="v-show-的特性"><a href="#v-show-的特性" class="headerlink" title="v-show 的特性"></a>v-show 的特性</h1><blockquote><p>透過v-show指令計算出為false，則<strong>透過CSS將該元素隱藏</strong>。</p></blockquote><p>程式原始碼:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-show</span>=<span class="string">&quot;true&quot;</span>&gt;</span>one<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-show</span>=<span class="string">&quot;false&quot;</span>&gt;</span>two<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>實際輸出:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>one<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;display: none;&quot;</span>&gt;</span>two<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><blockquote><p>雖然使用者都會看到相同的畫面，但實際存在著差異，v-if不會產生完整的HTML，v-show則透過CSS進行隱藏，所以v-if適用於還未透過ajax下載的資料，v-show用於對已存在的資料進行顯示與隱藏。</p></blockquote><p>想知道更多關於: <a href="https://vuejs.org/v2/guide/conditional.html#v-if-vs-v-show">v-if v.s. v-show</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+            <tag> Front-end </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何終止當前使用本地主機上的端口的進程</title>
+      <link href="/2021/11/22/how-to-kill-port/"/>
+      <url>/2021/11/22/how-to-kill-port/</url>
+      
+        <content type="html"><![CDATA[<p>:::tip 發生什麼事？<br>在進行本地開發時，需要透過本地端口建立伺服器連線進行預覽或測試，碰到端口(port)佔用時該如何解決呢？<br>:::</p><h3 id="For-Windows-user"><a href="#For-Windows-user" class="headerlink" title="For Windows user"></a>For Windows user</h3><h4 id="Step-1-找到佔用此端口的進程PID"><a href="#Step-1-找到佔用此端口的進程PID" class="headerlink" title="Step 1 找到佔用此端口的進程PID"></a>Step 1 找到佔用此端口的進程PID</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -ano | findstr:PortNumber</span><br></pre></td></tr></table></figure><p>想知道更多關於: <a href="https://docs.microsoft.com/zh-tw/windows-server/administration/windows-commands/netstat">netstat</a>、<a href="https://docs.microsoft.com/zh-tw/windows-server/administration/windows-commands/findstr">findstr</a></p><h4 id="Step-2-清除該進程"><a href="#Step-2-清除該進程" class="headerlink" title="Step 2 清除該進程"></a>Step 2 清除該進程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ taskkill /PID typeyourPIDhere /F</span><br></pre></td></tr></table></figure><p>想知道更多關於: <a href="https://docs.microsoft.com/zh-tw/windows-server/administration/windows-commands/taskkill">taskkill</a></p><h3 id="For-Unix-user"><a href="#For-Unix-user" class="headerlink" title="For Unix user"></a>For Unix user</h3><h4 id="Step-1-找到佔用此端口的進程PID-1"><a href="#Step-1-找到佔用此端口的進程PID-1" class="headerlink" title="Step 1 找到佔用此端口的進程PID"></a>Step 1 找到佔用此端口的進程PID</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -i:PortNumber </span><br></pre></td></tr></table></figure><p>想知道更多關於: <a href="https://man7.org/linux/man-pages/man8/lsof.8.html">lsof</a></p><h4 id="Step-2-清除該進程-1"><a href="#Step-2-清除該進程-1" class="headerlink" title="Step 2 清除該進程"></a>Step 2 清除該進程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">kill</span> typeyourPIDhere </span><br></pre></td></tr></table></figure><p>想知道更多關於: <a href="https://man7.org/linux/man-pages/man1/kill.1.html">kill</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Windows </tag>
+            
+            <tag> Mac </tag>
+            
+            <tag> Unix </tag>
+            
+            <tag> Bash </tag>
+            
+            <tag> 遇到問題就解決 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
